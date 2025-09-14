@@ -17,6 +17,8 @@ const Add = ({token}) => {
   const [price, setPrice] = useState("");
   const [sizes, setSizes] = useState([]); // Changed from `size` to `sizes`
   const [bestSeller, setBestSeller] = useState(false);
+  const [location,setLocation]=useState('');
+ 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     try {
@@ -29,6 +31,7 @@ const Add = ({token}) => {
         formData.append('price',price);
         formData.append('sizes',JSON.stringify(sizes));
         formData.append('bestSeller',bestSeller);
+        formData.append("location",location);
 
         image1&&formData.append('image1',image1);
         image2&&formData.append('image2',image2);
@@ -139,6 +142,21 @@ const Add = ({token}) => {
           placeholder="Type Here"
           required
         />
+
+
+      </div>
+      <div className="w-full">
+        <p className="mb-2">Location</p>
+        <input
+          onChange={(e) => setLocation(e.target.value)}
+          value={location}
+          className="w-full max-w-[500px ] px-3 py-2"
+          type="text"
+          placeholder="Type Here"
+          required
+        />
+
+
       </div>
       <div className="w-full">
         <p className="mb-2">Product Description</p>

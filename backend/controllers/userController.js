@@ -2,6 +2,8 @@ import validator from "validator";
 import userModel from "../models/userModel.js"
 import bcrypt from "bcrypt";
 import jwt from 'jsonwebtoken'
+import "dotenv/config";
+
 
 const createToken = (id) => {
     return jwt.sign({ id }, process.env.JWT_SECRET)
@@ -11,7 +13,7 @@ const createToken = (id) => {
 const loginUser = async (req,res) => {
     try{
         const {email, password} = req.body;
-
+        console.log(email,password) 
         const user = await userModel.findOne({email});
 
         if(!user){
@@ -85,6 +87,7 @@ const resgisterUser = async (req,res) => {
 const adminLogin = async (req,res) => {
     try{
         const {email,password} = req.body;
+        console.log(email+" "+password);
 
         if (email == process.env.ADMIN_EMAIL && password == process.env.ADMIN_PASSWORD){
             const token = jwt.sign(email + password, process.env.JWT_SECRET);
